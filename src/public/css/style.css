@@ -1,0 +1,55 @@
+body, .offcanvas{
+    background-color: #181818;
+    color: #b3b3b3 !important;
+
+    text-align: center;
+}
+
+.title{
+    margin-top: 25%;
+    margin-bottom: 15%;
+
+    font-size: 3rem;
+    color: white;
+}
+.subtitle{
+    font-size: 1rem;
+}
+.btn-success{
+    background-color: #1db954 !important;
+}
+.big_button{
+    width: 80%;
+    height: 30vh;
+    margin-top: 30%;
+    font-size: 4rem !important;
+    border-radius: 30px !important;
+}
+.succes_mesage{
+    margin-top: 40%;
+    color: #1db954;
+    font-size: 2.5rem;
+}
+.checkalok{
+    margin-top: 10%;
+    font-size: 1.5rem !important;
+    color: black;
+}
+
+footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height: 4%;
+    text-align: center;
+}
+.info{
+    margin-top: 0 !important;
+    height: 75% !important;
+    width: 80px !important;
+    vertical-align: top;
+    padding: 0;
+}
+.btn-close{
+    filter: invert(1)
+}

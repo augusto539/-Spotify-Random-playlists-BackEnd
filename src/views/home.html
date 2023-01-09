@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include('partials/head.html') %>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title"> Random spotify playlists </h1>
+
+        <% if (status == 'succes') { %>
+            <h2 class="subtitle"> Any genre, artist or style all can be!! </h2>
+            <h3 class="succes_mesage"> playlist created ! </h3>
+            <a href="<%- PL_link %>">
+                <button type="" class="btn btn-success checkalok"> Check a look! </button>
+            </a>
+        <% }; %>
+        <% if (status == 'not_registered_user') { %>
+            <h2 class="subtitle" style="color: #1db954;"> You dot't are registered in this app, please send a email to: <a href="mailto:augustoantonelli88@gmail.com">augustoantonelli88@gmail.com</a></h2>
+            <a href="/login">
+                <button type="" class="btn btn-success big_button"> Log in </button>
+            </a>  
+        <% }; %>
+        <% if (status != 'not_registered_user' && status != 'succes') {  %>
+            <h2 class="subtitle"> Any genre, artist or style all can be!! </h2>
+            <a href="/home/crear" id="2">
+                <button type="" class="btn btn-success big_button"> Create playlist </button>
+            </a> 
+        <% }; %>
+    </div>
+</body>
+<footer>
+    <%- include('partials/footer.html') %>
+</footer>
+</html>
