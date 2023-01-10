@@ -104,7 +104,7 @@ router.get('/callback', (req, res) => {
     };
 
     res.cookie('token',cookie_val)
-    res.redirect('http://192.168.1.34:3000/home');
+    res.redirect('http://192.168.1.37:3000/home');
   }).catch(error => {
     console.error('Error getting Tokens:', error);
     res.send(`Error getting Tokens: ${error}`);
@@ -126,7 +126,8 @@ router.get('/userinfo', (req, res) => {
 
 // get 30 tracks
 router.get('/get30tracks', (req, res) => {
-  get_tracs(token,eq.params.NubmerOfTracks).then( track_list => {
+  let token = req.cookies.token.access_token
+  get_tracs(token).then( track_list => {
     res.send(track_list)
   });
 });

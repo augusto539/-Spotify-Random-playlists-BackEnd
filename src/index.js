@@ -15,15 +15,16 @@ app.engine('html', require('ejs').renderFile)
 app.set('view engine', 'ejs');
 // MIDDLEWARES
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', 'http://192.168.1.37:3000');
     res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Credentials', 'true');
     next();
 });
 //app.use(favicon('src/public/img/utn_logo.png'));
 // app.use(cors({origin: '*'}));
 app.use(cookieParser());
-dotenv.config({path: 'src/env/.env'});
+dotenv.config({path: 'src/.env'});
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(require('./routes/index'));
