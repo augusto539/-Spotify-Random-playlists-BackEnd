@@ -124,42 +124,53 @@ router.get('/userinfo', (req, res) => {
   });
 });
 
-// get 30 tracks
-router.get('/get30tracks', (req, res) => {
+// get tracks
+router.get('/gettracks/:number_of_tracks', (req, res) => {
   let token = req.cookies.token.access_token
-  get_tracs(token).then( track_list => {
+  let number_of_tracks = req.params.number_of_tracks
+  get_tracs(token, number_of_tracks).then( track_list => {
     res.send(track_list)
   });
 });
 
-async function get_tracs(token){  
+async function get_tracs(token, number_of_tracks){  
   let tracks = [];
-  
-  for (let i = 0; i < 2; i++) {
-    let list_of_generes = [];
-    for (let i = 0; i < 5; i++) {
-      let number = Math.floor(Math.random() * (genres.length));
-      list_of_generes.push(genres[number]);
-    };
+  let number_of_generes = 0;
+  let list_of_generes = [];
 
-    let url = `https://api.spotify.com/v1/recommendations?limit=15&seed_genres=${list_of_generes.join("%2C")}`;
-    let Authorization = `Bearer ${token}`
-    let response = await axios({
-      url: url,
-      method: 'get',
-      headers: {'Accept': 'application/json','Content-Type': 'application/json','Authorization': Authorization}
-    });
-    response.data.tracks.forEach(element => {
-      tracks.push({
-        img: element.album.images[0],
-        artist_name: element.artists[0].name,
-        artist_url: element.artists[0].external_urls,
-        song_name: element.name,
-        song_url: element.external_urls.spotify,
-        song_uri: element.uri
-      });
-    });
+  if (number_of_tracks >= 5) {
+    number_of_generes = 5
+  } else {
+    number_of_generes = number_of_tracks
+  }
+  
+  // get a list of random generes
+  for (let i = 0; i < number_of_generes; i++) {
+    let number = Math.floor(Math.random() * (genres.length));
+    list_of_generes.push(genres[number]);
   };
+
+  // data for the request
+  let url = `https://api.spotify.com/v1/recommendations?limit=${number_of_tracks}&seed_genres=${list_of_generes.join("%2C")}`;
+  let Authorization = `Bearer ${token}`
+  // make the request to the spotify api
+  let response = await axios({
+    url: url,
+    method: 'get',
+    headers: {'Accept': 'application/json','Content-Type': 'application/json','Authorization': Authorization}
+  });
+
+  // save the data of the songs in the "tracks" list
+  response.data.tracks.forEach(element => {
+    tracks.push({
+      img: element.album.images[0],
+      artist_name: element.artists[0].name,
+      artist_url: element.artists[0].external_urls,
+      song_name: element.name,
+      song_url: element.external_urls.spotify,
+      song_uri: element.uri
+    });
+  });
 
   return tracks
 };
