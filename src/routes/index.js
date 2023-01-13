@@ -104,10 +104,9 @@ router.get('/callback', (req, res) => {
     };
 
     res.cookie('token',cookie_val)
-    res.redirect('http://192.168.1.37:3000/home');
+    res.redirect('http://192.168.1.37:3000/playlist');
   }).catch(error => {
-    console.error('Error getting Tokens:', error);
-    res.send(`Error getting Tokens: ${error}`);
+    // res.redirect('http://192.168.1.37:3000/home');
   });
 });
 
@@ -121,6 +120,8 @@ router.get('/userinfo', (req, res) => {
 
     res.send(info)
 
+  }).catch(error => {
+    // res.redirect('http://192.168.1.37:3000/home');
   });
 });
 
@@ -131,6 +132,15 @@ router.get('/gettracks/:number_of_tracks', (req, res) => {
   get_tracs(token, number_of_tracks).then( track_list => {
     res.send(track_list)
   });
+});
+
+// Create playlist
+router.post('/create', (req, res) => {
+  console.log(req.body.songs_list);
+  create_playlist(req.body.songs_list).then( () => {
+    // res.send('--------------playlist creada--------------------')
+    res.redirect('http://192.168.1.37:3000/home')
+  })
 });
 
 async function get_tracs(token, number_of_tracks){  
@@ -181,9 +191,12 @@ async function create_playlist(songs){ // songs = ["spotify:track:4iV5W9uYEdYUVa
   let text_date = d.toLocaleDateString();
 
   let data = await spotifyApi.createPlaylist(`All random (${text_date})`, { 'description': 'This playlist contains 30 aleatory songs', 'public': true })
+  let playlistId = data.body.id
 
-  spotifyApi.uploadCustomPlaylistCoverImage(data.body.id, img)
-  spotifyApi.addTracksToPlaylist(data.body.id, songs)
+  console.log(data.body)
+
+  // spotifyApi.uploadCustomPlaylistCoverImage(playlistId, img)
+  spotifyApi.addTracksToPlaylist(playlistId, songs)
 
   let link = data.body.external_urls.spotify
   return link
