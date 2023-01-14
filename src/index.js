@@ -15,7 +15,8 @@ app.engine('html', require('ejs').renderFile)
 app.set('view engine', 'ejs');
 // MIDDLEWARES
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://192.168.1.37:3000');
+    // res.header('Access-Control-Allow-Origin', 'http://192.168.1.37:3000');
+    res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Content-Length');
     res.header('Access-Control-Allow-Credentials', 'true');
@@ -32,9 +33,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 // LISTENING THE SERVER
 
 
-const os = require('os')
-app.set('hostname', os.networkInterfaces()['Ethernet 2'][1]['address']); //get the ipv4 of the sistem
-app.listen(app.get('port'),app.get('hostname') , () => console.log(`Server runing at http://${app.get('hostname')}:${app.get('port')}/`));
+// const os = require('os')
+// app.set('hostname', os.networkInterfaces()['Ethernet 2'][1]['address']); //get the ipv4 of the sistem
+// app.listen(app.get('port'),app.get('hostname') , () => console.log(`Server runing at http://${app.get('hostname')}:${app.get('port')}/`));
 
 
-// app.listen(app.get('port') , () => console.log(`Server runing on port: ${app.get('port')}`));
+app.listen(app.get('port') , () => console.log(`Server runing on port: ${app.get('port')}`));

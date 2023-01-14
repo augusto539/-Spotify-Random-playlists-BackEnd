@@ -107,9 +107,10 @@ router.post('/register', (req, res) => {
   console.log(req.body.user);
   console.log(req.body.email);
 
-  register_user.register_user(Data.user,Data.email).then(
-    // res.redirect('http://192.168.1.37:3000/home')
-  )
+  register_user.register_user(Data.user,Data.email).then( isDone => {
+    // res.send('all okey')
+    res.redirect('http://192.168.1.37:3000/home')
+  })
 
 });
 

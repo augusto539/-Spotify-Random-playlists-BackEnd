@@ -56,6 +56,7 @@ async function register_user(new_user_user, useremail) {
         await page.waitForTimeout(3000);   
     } catch (error) {
         console.log("all okey, no terms for service showed")
+        console.log(error)
     }
 
     await page.goto(app_url)
@@ -82,6 +83,8 @@ async function register_user(new_user_user, useremail) {
     await browser.close();
 
     console.log('---------------------- user reguister -----------------------')
+
+    return true
 }
 
 
