@@ -60,6 +60,7 @@ router.get('/callback', (req, res) => {
       expiration_date: expiration_date
     };
 
+    console.log(cookie_val)
     res.cookie('token',cookie_val)
     // res.redirect('https://spotify-random-playlists-front-end.vercel.app/playlist');
   }).catch(error => {
