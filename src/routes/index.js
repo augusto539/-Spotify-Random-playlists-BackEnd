@@ -60,8 +60,9 @@ router.get('/callback', (req, res) => {
       expiration_date: expiration_date
     };
 
-    res.cookie('token',cookie_val)
     res.redirect(process.env.FRONTEND_URL + '/playlist');
+    res.cookie('token',cookie_val)
+    
   }).catch(error => {
     // res.redirect('http://192.168.1.37:3000/home');
   });
