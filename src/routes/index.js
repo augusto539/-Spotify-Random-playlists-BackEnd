@@ -61,7 +61,7 @@ router.get('/callback', (req, res) => {
     };
 
     res.cookie('token',cookie_val)
-    res.redirect('https://spotify-random-playlists-front-end.vercel.app/playlist');
+    // res.redirect('https://spotify-random-playlists-front-end.vercel.app/playlist');
   }).catch(error => {
     // res.redirect('http://192.168.1.37:3000/home');
   });
@@ -96,7 +96,7 @@ router.post('/create', (req, res) => {
   console.log(req.body.songs_list);
   create_playlist.create_playlist(spotifyApi,req.body.songs_list).then( () => {
     // res.send('--------------playlist creada--------------------')
-    res.redirect('https://spotify-random-playlists-front-end.vercel.app/home')
+    // res.redirect('https://spotify-random-playlists-front-end.vercel.app/home')
   })
 });
 
@@ -109,7 +109,7 @@ router.post('/register', (req, res) => {
 
   register_user.register_user(Data.user,Data.email).then( isDone => {
     // res.send('all okey')
-    res.redirect('https://spotify-random-playlists-front-end.vercel.app/home')
+    // res.redirect('https://spotify-random-playlists-front-end.vercel.app/home')
   })
 
 });
