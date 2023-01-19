@@ -60,9 +60,8 @@ router.get('/callback', (req, res) => {
       expiration_date: expiration_date
     };
 
-    console.log(cookie_val)
     res.cookie('token',cookie_val)
-    // res.redirect('https://spotify-random-playlists-front-end.vercel.app/playlist');
+    res.redirect(process.env.FRONTEND_URL + '/playlist');
   }).catch(error => {
     // res.redirect('http://192.168.1.37:3000/home');
   });
